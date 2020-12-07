@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
-class ComponentForm extends Component {
+class CommentForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,12 +25,12 @@ class ComponentForm extends Component {
      }
      
     handleComment(values) {
+        //console.log("Calling HandleComment");
         this.toggleModal();
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
     render() {
-        
+        //console.log("Calling CommentForm");
         return(
             <div className="container">
                 <Button outline onClick={this.toggleModal}>    
@@ -107,10 +107,11 @@ class ComponentForm extends Component {
         );
     }
 
-    function RenderComments({comment}) {
+    function RenderComments({comments, addComment, dishId}) {
         
-        if(comment != null) {
-            const commentItem = comment.map(item => (
+        if(comments != null) {
+            //console.log("Calling RenderComments");
+            const commentItem = comments.map(item => (
                 <li key={item.id}>
                     <p>{item.comment}</p>
                     <p>-- {item.author}, 
@@ -124,7 +125,7 @@ class ComponentForm extends Component {
                     <h4>Comments</h4>
                     <ul className="list-unstyled">{commentItem}</ul>
                     <div>
-                        <ComponentForm />
+                        <CommentForm dishId={dishId} addComment={addComment} />
                         
                     </div>
                 </div>  
@@ -156,7 +157,10 @@ class ComponentForm extends Component {
                         <RenderDish dish={props.dish} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments comment={props.comments} />
+                    <RenderComments comments={props.comments}
+                                    addComment={props.addComment}
+                                    dishId={props.dish.id}
+                                />
                     </div>
                 </div>
             </div>
