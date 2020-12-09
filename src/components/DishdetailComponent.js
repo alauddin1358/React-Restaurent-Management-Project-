@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, CardImg, CardText, CardBody,
-    CardTitle, Breadcrumb, BreadcrumbItem, Button, Row, Col, Label,
+    CardTitle, Breadcrumb, BreadcrumbItem, Button, Row, Label,
     Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
@@ -63,7 +63,7 @@ class CommentForm extends Component {
                                         className="form-control mx-2"
                                         validators={{
                                             minLength: minLength(3), maxLength: maxLength(15)
-                                        }}
+                                        }} 
                                         />
                                     <Errors
                                         className="text-danger mx-2"
@@ -89,11 +89,7 @@ class CommentForm extends Component {
                             </LocalForm>
                         </ModalBody>
                     </Modal>
-                 </div>
-               
-                        
-                        
-                            
+                 </div>             
             </div>    
         );
     }
@@ -134,7 +130,7 @@ class CommentForm extends Component {
                                     </Fade>
                                 );
                             })}
-                            </Stagger>
+                         </Stagger>
                         </ul>
                     <div>
                         <CommentForm dishId={dishId} postComment={postComment} />
